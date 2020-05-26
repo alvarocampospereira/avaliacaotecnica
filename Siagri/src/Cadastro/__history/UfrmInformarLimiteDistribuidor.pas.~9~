@@ -1,0 +1,71 @@
+unit UfrmInformarLimiteDistribuidor;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, UfrmBaseModal, StdCtrls, Buttons, ExtCtrls;
+
+type
+  TfrmInformarLimiteDistribuidor = class(TfrmBaseModal)
+    Label1: TLabel;
+    Label2: TLabel;
+    Panel1: TPanel;
+    btnConfirmar: TBitBtn;
+    btnCancelar: TBitBtn;
+    edtCodigoDistribuidor: TEdit;
+    edtNomeDistribuidor: TEdit;
+    btnPesquisarDistribuidor: TSpeedButton;
+    edtLimite: TEdit;
+    procedure edtLimiteExit(Sender: TObject);
+    procedure btnPesquisarDistribuidorClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmInformarLimiteDistribuidor: TfrmInformarLimiteDistribuidor;
+
+implementation
+
+uses UfrmPesquisaDistribuidor;
+
+{$R *.dfm}
+
+procedure TfrmInformarLimiteDistribuidor.btnCancelarClick(Sender: TObject);
+begin
+  inherited;
+  Close;
+end;
+
+procedure TfrmInformarLimiteDistribuidor.btnPesquisarDistribuidorClick(Sender: TObject);
+begin
+  inherited;
+  frmPesquisaDistribuidor := TfrmPesquisaDistribuidor.Create(Self);
+  frmPesquisaDistribuidor.ShowModal;
+  if frmPesquisaDistribuidor.ID > 0 then
+    begin
+      edtCodigoDistribuidor.Text := inttoStr(frmPesquisaDistribuidor.ID);
+      edtNomeDistribuidor.Text := frmPesquisaDistribuidor.Descricao;
+    end;
+  frmPesquisaDistribuidor.Free;
+end;
+
+procedure TfrmInformarLimiteDistribuidor.edtLimiteExit(Sender: TObject);
+begin
+  inherited;
+  Try
+    TEdit(Sender).Text := StringReplace(TEdit(Sender).Text, '.', '', [rfReplaceAll]);
+    {Verificar se é uma valor numerico}
+    StrToFloat(TEdit(Sender).Text);
+
+    TEdit(Sender).Text := FormatFloat('0.00', StrToFloat(TEdit(Sender).Text));
+ Except on EConvertError do
+    //
+ End;
+end;
+
+end.

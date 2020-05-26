@@ -1,0 +1,164 @@
+unit UfrmManutencaoNegociacao;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ufrmBaseChild, StdCtrls, udtmNegociacao, ExtCtrls, Buttons;
+
+type
+  TfrmManutencaoNegociacao = class(TfrmBaseChild)
+    Label1: TLabel;
+    edtNegociacao: TEdit;
+    edtStatusAtual: TEdit;
+    pnlRodape: TPanel;
+    lblStatus: TLabel;
+    edtDataCadastro: TEdit;
+    Label3: TLabel;
+    edtNomeProdutor: TEdit;
+    edtNomeDistribuidor: TEdit;
+    lblDistribuidor: TLabel;
+    lblProdutor: TLabel;
+    edtCodProdutor: TEdit;
+    edtCodDistribuidor: TEdit;
+    edtValorTotal: TEdit;
+    lblValorTotal: TLabel;
+    btnAlterarStatus: TBitBtn;
+    btnLimpar: TBitBtn;
+    btnFechar: TBitBtn;
+    rgpNovoStatus: TRadioGroup;
+    procedure btnAlterarStatusClick(Sender: TObject);
+    procedure btnFecharClick(Sender: TObject);
+    procedure btnLimparClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure edtNegociacaoExit(Sender: TObject);
+  private
+    { Private declarations }
+    FNegociacao: TdtmNegociacao;
+    procedure BuscarDadosNegociacao(idNegociacao: Integer);
+    procedure Limpar;
+  public
+    { Public declarations }
+  end;
+
+var
+  frmManutencaoNegociacao: TfrmManutencaoNegociacao;
+
+implementation
+
+uses DB;
+
+{$R *.dfm}
+
+procedure TfrmManutencaoNegociacao.btnAlterarStatusClick(Sender: TObject);
+var sNovoStatus: String;
+begin
+  inherited;
+
+  case rgpNovoStatus.ItemIndex of
+    0: sNovoStatus := 'A';
+    1: sNovoStatus := 'U';
+    2: sNovoStatus := 'C';
+  end;
+
+  FNegociacao.alterarStatusNegociacao(strtoInt(edtNegociacao.Text),
+    sNovoStatus);
+end;
+
+procedure TfrmManutencaoNegociacao.btnFecharClick(Sender: TObject);
+begin
+  inherited;
+  Close;
+end;
+
+procedure TfrmManutencaoNegociacao.btnLimparClick(Sender: TObject);
+begin
+  inherited;
+  Limpar;
+end;
+
+procedure TfrmManutencaoNegociacao.BuscarDadosNegociacao(idNegociacao: Integer);
+begin
+  with FNegociacao.cdsConsultaNeg do
+   begin
+    Close;
+    CommandText := 'SELECT NEGOCIACAO.status, NEGOCIACAO.id_produtor, PRODUTOR.nomeprodutor, ' +
+      ' NEGOCIACAO.id_distribuidor, DISTRIBUIDOR.nomedistribuidor, ' +
+      ' NEGOCIACAO.datacadastro, NEGOCIACAO.valortotal , NEGOCIACAO.dataaprovacao, '
+      ' NEGOCIACAO.dataconclusao, NEGOCIACAO.datacancelamento, negociacao.codigocontrato ' +
+      ' FROM NEGOCIACAO, DISTRIBUIDOR, PRODUTOR ' +
+      ' WHERE NEGOCIACAO.id_distribuidor = DISTRIBUIDOR.id_distribuidor ' +
+      '   AND NEGOCIACAO.id_produtor = PRODUTOR.id_produtor ' +
+      ' AND NEGOCIACAO.id_negociacao = :IDNEGOCIACAO ';
+    Params.ParamByName('IDNEGOCIACAO').AsInteger := idNegociacao;
+    Open;
+    if recordCount = 0 then
+      raise exception.Create('Negociação não cadastrada!');
+    if FieldByName('STATUS').AsString <> 'P' then
+      raise exception.Create('Negociação com status : ' +
+        FNegociacao.obterNomeStatus(FieldByName('STATUS').AsString) +
+        '. Não é possível alterar.');
+
+    edtStatusAtual.Text := FNegociacao.obterNomeStatus(FieldByName('STATUS').AsString);
+    edtDataCadastro.Text := FieldByName('datacadastro').AsString;
+    edtValorTotal.Text := FloatToStrF(FieldByName('valortotal').AsCurrency, ffNumber,15,2);
+    edtCodProdutor.Text := FieldByName('id_produtor').AsString;
+    edtNomeProdutor.Text := FieldByName('nomeprodutor').AsString;
+    edtCodDistribuidor.Text := FieldByName('id_distribuidor').AsString;
+    edtNomeDistribuidor.Text := FieldByName('nomedistribuidor').AsString;
+
+    edtNegociacao.Enabled := False;
+    btnAlterarStatus.Enabled := True;
+    rgpNovoStatus.ItemIndex := 0;
+    rgpNovoStatus.SetFocus;
+  end;
+end;
+
+procedure TfrmManutencaoNegociacao.edtNegociacaoExit(Sender: TObject);
+var iCod: Integer;
+begin
+  inherited;
+  if Trim(edtNegociacao.Text) <> '' then
+    begin
+      try
+        iCod := StrToInt(edtNegociacao.Text);
+      except
+        raise exception.Create('Favor informar o código da negociação');
+      end;
+      // busca a negociação, quando pendente
+      BuscarDadosNegociacao(iCod);
+    end; // if
+end;
+
+procedure TfrmManutencaoNegociacao.FormCreate(Sender: TObject);
+begin
+  inherited;
+  FNegociacao := TdtmNegociacao.Create(Self);
+
+
+end;
+
+procedure TfrmManutencaoNegociacao.FormShow(Sender: TObject);
+begin
+  inherited;
+  Limpar;
+end;
+
+procedure TfrmManutencaoNegociacao.Limpar;
+begin
+  edtNegociacao.Enabled := True;
+  edtNegociacao.Clear;
+  edtNegociacao.SetFocus;
+  edtStatusAtual.Clear;
+  edtDataCadastro.Clear;
+  edtValorTotal.Clear;
+  edtCodProdutor.Clear;
+  edtNomeProdutor.Clear;
+  edtCodDistribuidor.Clear;
+  edtNomeDistribuidor.Clear;
+  rgpNovoStatus.ItemIndex := -1;
+  btnAlterarStatus.Enabled := False;
+end;
+
+end.

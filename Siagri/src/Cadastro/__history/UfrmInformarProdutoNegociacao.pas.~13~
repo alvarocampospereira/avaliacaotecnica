@@ -1,0 +1,80 @@
+unit UfrmInformarProdutoNegociacao;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, UfrmBaseModal, StdCtrls, Buttons, ExtCtrls;
+
+type
+  TfrmInformarProdutoNegociacao = class(TfrmBaseModal)
+    Label1: TLabel;
+    lblQuantidade: TLabel;
+    btnPesquisarProduto: TSpeedButton;
+    Panel1: TPanel;
+    btnConfirmar: TBitBtn;
+    btnCancelar: TBitBtn;
+    edtCodigoProduto: TEdit;
+    edtNomeProduto: TEdit;
+    edtLimite: TEdit;
+    edtValorUnitario: TEdit;
+    edtValorTotal: TEdit;
+    lblValorUnitario: TLabel;
+    lblValorTotal: TLabel;
+    procedure btnConfirmarClick(Sender: TObject);
+    procedure btnPesquisarProdutoClick(Sender: TObject);
+    procedure edtLimiteExit(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    
+  end;
+
+var
+  frmInformarProdutoNegociacao: TfrmInformarProdutoNegociacao;
+
+implementation
+
+uses UfrmPesquisaProduto;
+
+{$R *.dfm}
+
+procedure TfrmInformarProdutoNegociacao.btnCancelarClick(Sender: TObject);
+begin
+  inherited;
+  Close;
+end;
+
+procedure TfrmInformarProdutoNegociacao.btnPesquisarProdutoClick(
+  Sender: TObject);
+begin
+  inherited;
+  frmPesquisaProduto := TfrmPesquisaProduto.Create(Self);
+  frmPesquisaProduto.ShowModal;
+  if frmPesquisaProduto.ID > 0 then
+    begin
+      edtCodigoProduto.Text := inttoStr(frmPesquisaProduto.ID);
+      edtNomeProduto.Text := frmPesquisaProduto.Descricao;
+    end;
+  frmPesquisaProduto.Free;
+end;
+
+procedure TfrmInformarProdutoNegociacao.edtLimiteExit(Sender: TObject);
+begin
+  inherited;
+  Try
+    TEdit(Sender).Text := StringReplace(TEdit(Sender).Text, '.', '', [rfReplaceAll]);
+    {Verificar se é uma valor numerico}
+    StrToFloat(TEdit(Sender).Text);
+
+    TEdit(Sender).Text := FormatFloat('0.00', StrToFloat(TEdit(Sender).Text));
+ Except on EConvertError do
+    TEdit(Sender).Text := '0,00';
+ End;
+
+ edtValorTotal.Text :=  FormatFloat('0.00', StrToFloat(TEdit(Sender).Text) * StrToFloat(edtValorUnitario.Text));
+end;
+
+end.
