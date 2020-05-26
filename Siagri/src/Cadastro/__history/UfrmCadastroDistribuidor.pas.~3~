@@ -1,0 +1,25 @@
+unit UfrmCadastroDistribuidor;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, UfrmCadastroBase, ComCtrls, Buttons, ExtCtrls, DB, Grids, DBGrids,
+  DBCtrls;
+
+type
+  TfrmCadastroDistribuidor = class(TfrmCadastroBase)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadastroDistribuidor: TfrmCadastroDistribuidor;
+
+implementation
+
+{$R *.dfm}
+
+end.

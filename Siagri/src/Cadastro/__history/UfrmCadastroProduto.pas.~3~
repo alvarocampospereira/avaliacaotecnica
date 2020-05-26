@@ -1,0 +1,24 @@
+unit UfrmCadastroProduto;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, UfrmCadastroBase, ComCtrls, Buttons, ExtCtrls;
+
+type
+  TfrmCadastroProduto = class(TfrmCadastroBase)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadastroProduto: TfrmCadastroProduto;
+
+implementation
+
+{$R *.dfm}
+
+end.

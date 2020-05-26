@@ -1,0 +1,53 @@
+unit UfrmCadastroBase;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TfrmCadastroBase = class(TForm)
+    pnlMenu: TPanel;
+    btnNovo: TSpeedButton;
+    btnSalvar: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    SpeedButton4: TSpeedButton;
+    SpeedButton5: TSpeedButton;
+    SpeedButton6: TSpeedButton;
+    SpeedButton7: TSpeedButton;
+    SpeedButton8: TSpeedButton;
+    dtsCadastro: TDataSource;
+    procedure btnNovoClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure dtsCadastroStateChange(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadastroBase: TfrmCadastroBase;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmCadastroBase.btnNovoClick(Sender: TObject);
+begin
+  dtsCadastro.DataSet.Append;
+end;
+
+procedure TfrmCadastroBase.dtsCadastroStateChange(Sender: TObject);
+begin
+  btnNovo.Enabled := not(dtsCadastro.DataSet.State in [dsEdit, dsInsert]);
+  btnSalvar.Enabled := (dtsCadastro.DataSet.State in [dsEdit, dsInsert]);
+end;
+
+procedure TfrmCadastroBase.FormCreate(Sender: TObject);
+begin
+  dtsCadastro.DataSet.Open;
+end;
+
+end.

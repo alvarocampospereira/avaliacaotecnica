@@ -1,0 +1,167 @@
+inherited frmCadastroProdutor: TfrmCadastroProdutor
+  Caption = 'Cadastro de Produtor'
+  ClientHeight = 389
+  ClientWidth = 595
+  OnDestroy = FormDestroy
+  ExplicitWidth = 611
+  ExplicitHeight = 428
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited pnlMenu: TPanel
+    Width = 595
+  end
+  inherited pgcPrincipal: TPageControl
+    Width = 595
+    Height = 340
+    ExplicitHeight = 340
+    inherited tbsCadastro: TTabSheet
+      object lblCodigo: TLabel
+        Left = 20
+        Top = 6
+        Width = 38
+        Height = 13
+        Caption = 'C'#243'digo'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object lblNomeProdutor: TLabel
+        Left = 20
+        Top = 52
+        Width = 85
+        Height = 13
+        Caption = 'Nome Produtor'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object lblValorVenda: TLabel
+        Left = 20
+        Top = 97
+        Width = 55
+        Height = 13
+        Caption = 'Cnpj / Cpf'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object edtCodigo: TDBEdit
+        Left = 20
+        Top = 22
+        Width = 77
+        Height = 21
+        DataField = 'ID_PRODUTOR'
+        DataSource = dtsCadastro
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 0
+      end
+      object edtNomeProdutor: TDBEdit
+        Left = 20
+        Top = 68
+        Width = 301
+        Height = 21
+        CharCase = ecUpperCase
+        DataField = 'NOMEPRODUDOR'
+        DataSource = dtsCadastro
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 1
+      end
+      object edtCnpjCpf: TDBEdit
+        Left = 20
+        Top = 114
+        Width = 157
+        Height = 21
+        DataField = 'CPFCNPJPRODUTOR'
+        DataSource = dtsCadastro
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 2
+      end
+      object GroupBox1: TGroupBox
+        Left = 0
+        Top = 141
+        Width = 587
+        Height = 171
+        Align = alBottom
+        Caption = 'Limite Distribuidor '
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 3
+        ExplicitWidth = 569
+        object btnExcluirDistribuidor: TSpeedButton
+          Left = 128
+          Top = 17
+          Width = 121
+          Height = 22
+          Caption = 'Excluir Distribuidor'
+        end
+        object btnInserirDistribuidor: TSpeedButton
+          Left = 16
+          Top = 17
+          Width = 105
+          Height = 22
+          Caption = 'Inserir Distribuidor'
+          OnClick = btnInserirDistribuidorClick
+        end
+        object grdDistribuidorLimite: TDBGrid
+          Left = 2
+          Top = 45
+          Width = 583
+          Height = 124
+          Align = alBottom
+          DataSource = dtsDistribuidorLimite
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Tahoma'
+          TitleFont.Style = [fsBold]
+        end
+      end
+    end
+    inherited tbsLista: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 24
+      ExplicitWidth = 569
+      ExplicitHeight = 312
+      inherited grdListaCadastro: TDBGrid
+        Width = 587
+        Height = 312
+      end
+    end
+  end
+  inherited dtsCadastro: TDataSource
+    OnDataChange = dtsCadastroDataChange
+  end
+  object dtsDistribuidorLimite: TDataSource
+    Left = 392
+    Top = 240
+  end
+end

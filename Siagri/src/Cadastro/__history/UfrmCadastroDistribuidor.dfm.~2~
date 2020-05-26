@@ -1,0 +1,19 @@
+inherited frmCadastroDistribuidor: TfrmCadastroDistribuidor
+  Caption = 'Cadastro de Distribuidor'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited pgcPrincipal: TPageControl
+    inherited tbsCadastro: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 24
+      ExplicitWidth = 569
+      ExplicitHeight = 268
+    end
+    inherited tbsLista: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 24
+      ExplicitWidth = 569
+      ExplicitHeight = 268
+    end
+  end
+end

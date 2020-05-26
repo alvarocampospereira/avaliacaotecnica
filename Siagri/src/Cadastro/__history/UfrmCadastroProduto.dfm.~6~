@@ -1,0 +1,58 @@
+inherited frmCadastroProduto: TfrmCadastroProduto
+  Caption = 'frmCadastroProduto'
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited pgcPrincipal: TPageControl
+    inherited tbsCadastro: TTabSheet
+      ExplicitWidth = 569
+      ExplicitHeight = 268
+      object Label1: TLabel
+        Left = 24
+        Top = 24
+        Width = 31
+        Height = 13
+        Caption = 'Label1'
+      end
+      object Label2: TLabel
+        Left = 32
+        Top = 96
+        Width = 31
+        Height = 13
+        Caption = 'Label2'
+      end
+      object Label3: TLabel
+        Left = 40
+        Top = 168
+        Width = 31
+        Height = 13
+        Caption = 'Label3'
+      end
+      object DBEdit1: TDBEdit
+        Left = 32
+        Top = 40
+        Width = 121
+        Height = 21
+        TabOrder = 0
+      end
+      object DBEdit2: TDBEdit
+        Left = 32
+        Top = 120
+        Width = 121
+        Height = 21
+        TabOrder = 1
+      end
+      object DBEdit3: TDBEdit
+        Left = 48
+        Top = 192
+        Width = 121
+        Height = 21
+        TabOrder = 2
+      end
+    end
+    inherited tbsLista: TTabSheet
+      ExplicitWidth = 569
+      ExplicitHeight = 268
+    end
+  end
+end
