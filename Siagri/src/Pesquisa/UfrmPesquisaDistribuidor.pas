@@ -1,0 +1,50 @@
+unit UfrmPesquisaDistribuidor;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, UfrmPesquisaBase, DB, Grids, DBGrids, StdCtrls, Buttons, ExtCtrls,
+  udtmDistribuidor;
+
+type
+  TfrmPesquisaDistribuidor = class(TfrmPesquisaBase)
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+    FDistribuidor: TdtmDistribuidor;
+  public
+    { Public declarations }
+  protected
+    procedure ExecutarBusca; override;
+  end;
+
+var
+  frmPesquisaDistribuidor: TfrmPesquisaDistribuidor;
+
+implementation
+
+uses DBClient;
+
+{$R *.dfm}
+
+procedure TfrmPesquisaDistribuidor.ExecutarBusca;
+begin
+  with FDistribuidor.cdsDistribuidor do
+    begin
+      Close;
+      CommandText := 'SELECT * FROM DISTRIBUIDOR WHERE DISTRIBUIDOR.NOMEDISTRIBUIDOR LIKE ''%' + edtPesquisa.Text + '%'' ORDER BY DISTRIBUIDOR.NOMEDISTRIBUIDOR';
+      Open;
+    end;
+end;
+
+procedure TfrmPesquisaDistribuidor.FormCreate(Sender: TObject);
+begin
+  FDistribuidor := TdtmDistribuidor.Create(Self);
+  dtsPesquisa.DataSet := FDistribuidor.cdsDistribuidor;
+  inherited;
+  CampoID := 'ID_DISTRIBUIDOR';
+  CampoDescricao := 'NOMEDISTRIBUIDOR';
+end;
+
+end.

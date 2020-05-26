@@ -1,0 +1,11 @@
+inherited frmPesquisaProduto: TfrmPesquisaProduto
+  Caption = 'frmPesquisaProduto'
+  ExplicitWidth = 463
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited pnlRodape: TPanel
+    ExplicitLeft = 0
+    ExplicitTop = 207
+    ExplicitWidth = 447
+  end
+end

@@ -1,0 +1,24 @@
+unit UfrmPesquisaDistribuidor;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, UfrmPesquisaBase, DB, Grids, DBGrids, StdCtrls, Buttons, ExtCtrls;
+
+type
+  TfrmPesquisaDistribuidor = class(TfrmPesquisaBase)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPesquisaDistribuidor: TfrmPesquisaDistribuidor;
+
+implementation
+
+{$R *.dfm}
+
+end.

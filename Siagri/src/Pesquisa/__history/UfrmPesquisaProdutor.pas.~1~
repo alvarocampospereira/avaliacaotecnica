@@ -1,0 +1,24 @@
+unit UfrmPesquisaProdutor;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, UfrmPesquisaBase, DB, Grids, DBGrids, StdCtrls, Buttons, ExtCtrls;
+
+type
+  TfrmPesquisaProdutor = class(TfrmPesquisaBase)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPesquisaProdutor: TfrmPesquisaProdutor;
+
+implementation
+
+{$R *.dfm}
+
+end.

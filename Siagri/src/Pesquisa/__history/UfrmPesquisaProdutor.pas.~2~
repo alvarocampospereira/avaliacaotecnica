@@ -1,0 +1,39 @@
+unit UfrmPesquisaProdutor;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, UfrmPesquisaBase, DB, Grids, DBGrids, StdCtrls, Buttons, ExtCtrls;
+
+type
+  TfrmPesquisaProdutor = class(TfrmPesquisaBase)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  protected
+    procedure ExecutarBusca; override;  
+  end;
+
+var
+  frmPesquisaProdutor: TfrmPesquisaProdutor;
+
+implementation
+
+{$R *.dfm}
+
+{ TfrmPesquisaProdutor }
+
+procedure TfrmPesquisaProdutor.ExecutarBusca;
+begin
+  inherited;
+  with FDistribuidor.cdsDistribuidor do
+    begin
+      Close;
+      CommandText := 'SELECT * FROM PRODUTOR WHERE PRODUTOR.NOMEPRODUTOR LIKE ''%' + edtPesquisa.Text + '%'' ORDER BY PRODUTOR.NOMEPRODUTOR';
+      Open;
+    end;
+end;
+
+end.

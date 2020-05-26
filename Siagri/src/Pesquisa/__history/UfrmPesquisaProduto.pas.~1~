@@ -1,0 +1,24 @@
+unit UfrmPesquisaProduto;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, UfrmPesquisaBase, DB, Grids, DBGrids, StdCtrls, Buttons, ExtCtrls;
+
+type
+  TfrmPesquisaProduto = class(TfrmPesquisaBase)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPesquisaProduto: TfrmPesquisaProduto;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,206 @@
+inherited frmConsultaNegociacao: TfrmConsultaNegociacao
+  Caption = 'Consulta Negocia'#231#227'o'
+  ClientHeight = 376
+  ClientWidth = 538
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  ExplicitWidth = 554
+  ExplicitHeight = 415
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 21
+    Top = 69
+    Width = 66
+    Height = 13
+    Caption = 'Distribuidor'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clNavy
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object btnPesquisarDistribuidor: TSpeedButton
+    Left = 90
+    Top = 84
+    Width = 23
+    Height = 22
+    Hint = 'Pesquisar Distribuidor'
+    Caption = '...'
+    ParentShowHint = False
+    ShowHint = True
+    OnClick = btnPesquisarDistribuidorClick
+  end
+  object Label2: TLabel
+    Left = 21
+    Top = 13
+    Width = 50
+    Height = 13
+    Caption = 'Produtor'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clNavy
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object SpeedButton1: TSpeedButton
+    Left = 90
+    Top = 28
+    Width = 23
+    Height = 22
+    Hint = 'Pesquistar Produtor'
+    Caption = '...'
+    ParentShowHint = False
+    ShowHint = True
+    OnClick = SpeedButton1Click
+  end
+  object edtCodigoDistribuidor: TEdit
+    Left = 21
+    Top = 85
+    Width = 66
+    Height = 21
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 2
+  end
+  object edtNomeDistribuidor: TEdit
+    Left = 117
+    Top = 85
+    Width = 283
+    Height = 21
+    TabStop = False
+    Color = cl3DLight
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+    ReadOnly = True
+    TabOrder = 3
+  end
+  object edtCodigoProdutor: TEdit
+    Left = 21
+    Top = 29
+    Width = 66
+    Height = 21
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 0
+  end
+  object edtNomeProdutor: TEdit
+    Left = 117
+    Top = 29
+    Width = 283
+    Height = 21
+    TabStop = False
+    Color = cl3DLight
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+    ReadOnly = True
+    TabOrder = 1
+  end
+  object grdConsulta: TDBGrid
+    Left = 0
+    Top = 169
+    Width = 538
+    Height = 207
+    Align = alBottom
+    TabOrder = 5
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  object pnlBotoes: TPanel
+    Left = 0
+    Top = 128
+    Width = 538
+    Height = 41
+    Align = alBottom
+    BevelOuter = bvLowered
+    TabOrder = 4
+    ExplicitLeft = 72
+    ExplicitTop = 136
+    ExplicitWidth = 185
+    object btnConsultar: TBitBtn
+      Left = 24
+      Top = 8
+      Width = 100
+      Height = 25
+      Caption = 'Consultar'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      OnClick = btnConsultarClick
+    end
+    object btnLimpar: TBitBtn
+      Left = 284
+      Top = 8
+      Width = 100
+      Height = 25
+      Caption = 'Limpar'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+      OnClick = btnLimparClick
+    end
+    object BitBtn3: TBitBtn
+      Left = 414
+      Top = 8
+      Width = 100
+      Height = 25
+      Caption = 'Fechar'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 2
+      OnClick = BitBtn3Click
+    end
+    object btnImprimir: TBitBtn
+      Left = 154
+      Top = 8
+      Width = 100
+      Height = 25
+      Caption = 'Imprimir'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 3
+      OnClick = btnImprimirClick
+    end
+  end
+  object dtsConsulta: TDataSource
+    Left = 352
+    Top = 240
+  end
+end

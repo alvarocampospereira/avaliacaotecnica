@@ -1,0 +1,57 @@
+unit UfrmRelatorioNegociacao;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, OleCtrls, SHDocVw, ExtCtrls, activex ;
+
+type
+  TfrmRelatorioNegociacao = class(TForm)
+    WebBrowser: TWebBrowser;
+    Panel1: TPanel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure setarHtml(sHtml: TStringList);
+  end;
+
+var
+  frmRelatorioNegociacao: TfrmRelatorioNegociacao;
+
+implementation
+
+{$R *.dfm}
+
+{ TfrmRelatorioNegociacao }
+
+procedure TfrmRelatorioNegociacao.setarHtml(sHtml: TStringList);
+var
+   ms: TMemoryStream;
+begin
+   WebBrowser.Navigate('about:blank') ;
+   while WebBrowser.ReadyState < READYSTATE_INTERACTIVE do
+    Application.ProcessMessages;
+
+   if Assigned(WebBrowser.Document) then
+   begin
+     //sl := TStringList.Create;
+     try
+       ms := TMemoryStream.Create;
+       try
+         //sl.Text := HTMLCode;
+         //sl.SaveToStream(ms) ;
+         sHtml.SaveToStream(ms);
+         ms.Seek(0, 0) ;
+         (WebBrowser.Document as IPersistStreamInit).Load(TStreamAdapter.Create(ms)) ;
+       finally
+         ms.Free;
+       end;
+     finally
+       //sl.Free;
+     end;
+   end;
+end;
+
+end.

@@ -1,0 +1,41 @@
+unit UfrmPesquisaProduto;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, UfrmPesquisaBase, DB, Grids, DBGrids, StdCtrls, Buttons, ExtCtrls,
+  udtmProduto;
+
+type
+  TfrmPesquisaProduto = class(TfrmPesquisaBase)
+  private
+    { Private declarations }
+    FProduto: TdtmProduto;
+  public
+    { Public declarations }
+  protected
+    procedure ExecutarBusca; override;
+  end;
+
+var
+  frmPesquisaProduto: TfrmPesquisaProduto;
+
+implementation
+
+{$R *.dfm}
+
+{ TfrmPesquisaProduto }
+
+procedure TfrmPesquisaProduto.ExecutarBusca;
+begin
+  inherited;
+  with FDistribuidor.cdsDistribuidor do
+    begin
+      Close;
+      CommandText := 'SELECT * FROM PRODUTO WHERE PRODUTO.NOMEPRODUTO LIKE ''%' + edtPesquisa.Text + '%'' ORDER BY PRODUTO.NOMEPRODUTO';
+      Open;
+    end;
+end;
+
+end.

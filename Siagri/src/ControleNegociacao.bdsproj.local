@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2020/05/24 09:42:20.333.pas,C:\Users\anarq\OneDrive\Documentos\Borland Studio Projects\Unit1.pas=C:\delphi\Siagri\src\UfrmMenuPrincipal.pas</Transaction>
+    <Transaction>2020/05/24 09:42:20.333.dfm,C:\Users\anarq\OneDrive\Documentos\Borland Studio Projects\Unit1.dfm=C:\delphi\Siagri\src\UfrmMenuPrincipal.dfm</Transaction>
+    <Transaction>2020/05/24 09:42:57.850.bdsproj,C:\Users\anarq\OneDrive\Documentos\Borland Studio Projects\Project1.bdsproj=C:\delphi\Siagri\src\ControleNegociacao.bdsproj</Transaction>
+    <Transaction>2020/05/24 09:45:44.190.pas,C:\delphi\Siagri\src\Unit1.pas=C:\delphi\Siagri\src\Cadastro\UfrmCadastroBase.pas</Transaction>
+    <Transaction>2020/05/24 09:45:44.190.dfm,C:\delphi\Siagri\src\Unit1.dfm=C:\delphi\Siagri\src\Cadastro\UfrmCadastroBase.dfm</Transaction>
+    <Transaction>2020/05/24 10:05:22.436.pas,C:\delphi\Siagri\src\Unit1.pas=C:\delphi\Siagri\src\Base\ufrmBaseChild.pas</Transaction>
+    <Transaction>2020/05/24 10:05:22.436.dfm,C:\delphi\Siagri\src\Unit1.dfm=C:\delphi\Siagri\src\Base\ufrmBaseChild.dfm</Transaction>
+    <Transaction>2020/05/24 10:06:23.132.pas,C:\delphi\Siagri\src\Cadastro\UfrmCadastroBase.pas=</Transaction>
+    <Transaction>2020/05/24 10:06:23.133.dfm,C:\delphi\Siagri\src\Cadastro\UfrmCadastroBase.dfm=</Transaction>
+    <Transaction>2020/05/24 10:08:09.936.pas,C:\delphi\Siagri\src\Unit1.pas=C:\delphi\Siagri\src\Base\UfrmCadastroBase.pas</Transaction>
+    <Transaction>2020/05/24 10:08:09.936.dfm,C:\delphi\Siagri\src\Unit1.dfm=C:\delphi\Siagri\src\Base\UfrmCadastroBase.dfm</Transaction>
+    <Transaction>2020/05/24 10:21:37.364.pas,C:\delphi\Siagri\src\Unit1.pas=C:\delphi\Siagri\src\Cadastro\UfrmCadastroProduto.pas</Transaction>
+    <Transaction>2020/05/24 10:21:37.364.dfm,C:\delphi\Siagri\src\Unit1.dfm=C:\delphi\Siagri\src\Cadastro\UfrmCadastroProduto.dfm</Transaction>
+    <Transaction>2020/05/24 10:37:33.591.pas,C:\delphi\Siagri\src\Unit1.pas=C:\delphi\Siagri\src\Cadastro\UfrmCadastroDistribuidor.pas</Transaction>
+    <Transaction>2020/05/24 10:37:33.591.dfm,C:\delphi\Siagri\src\Unit1.dfm=C:\delphi\Siagri\src\Cadastro\UfrmCadastroDistribuidor.dfm</Transaction>
+    <Transaction>2020/05/24 11:16:07.666.pas,C:\delphi\Siagri\src\Unit1.pas=C:\delphi\Siagri\src\DM\UdtmPrincipal.pas</Transaction>
+    <Transaction>2020/05/24 11:16:07.666.dfm,C:\delphi\Siagri\src\Unit1.dfm=C:\delphi\Siagri\src\DM\UdtmPrincipal.dfm</Transaction>
+    <Transaction>2020/05/24 13:39:54.213.pas,C:\delphi\Siagri\src\Unit2.pas=C:\delphi\Siagri\src\DM\UdtmProduto.pas</Transaction>
+    <Transaction>2020/05/24 13:39:54.213.dfm,C:\delphi\Siagri\src\Unit2.dfm=C:\delphi\Siagri\src\DM\UdtmProduto.dfm</Transaction>
+    <Transaction>2020/05/24 15:22:25.054.pas,C:\delphi\Siagri\src\Unit1.pas=C:\delphi\Siagri\src\Cadastro\UfrmCadastroProdutor.pas</Transaction>
+    <Transaction>2020/05/24 15:22:25.054.dfm,C:\delphi\Siagri\src\Unit1.dfm=C:\delphi\Siagri\src\Cadastro\UfrmCadastroProdutor.dfm</Transaction>
+    <Transaction>2020/05/24 15:26:25.949.pas,C:\delphi\Siagri\src\Unit1.pas=C:\delphi\Siagri\src\DM\UdtmProdutor.pas</Transaction>
+    <Transaction>2020/05/24 15:26:25.949.dfm,C:\delphi\Siagri\src\Unit1.dfm=C:\delphi\Siagri\src\DM\UdtmProdutor.dfm</Transaction>
+    <Transaction>2020/05/24 15:27:07.697.pas,C:\delphi\Siagri\src\Unit2.pas=C:\delphi\Siagri\src\DM\UdtmDistribuidor.pas</Transaction>
+    <Transaction>2020/05/24 15:27:07.697.dfm,C:\delphi\Siagri\src\Unit2.dfm=C:\delphi\Siagri\src\DM\UdtmDistribuidor.dfm</Transaction>
+    <Transaction>2020/05/24 15:28:08.366.pas,C:\delphi\Siagri\src\Unit3.pas=C:\delphi\Siagri\src\DM\UdtmNegociacao.pas</Transaction>
+    <Transaction>2020/05/24 15:28:08.366.dfm,C:\delphi\Siagri\src\Unit3.dfm=C:\delphi\Siagri\src\DM\UdtmNegociacao.dfm</Transaction>
+    <Transaction>2020/05/24 16:54:12.547.pas,C:\delphi\Siagri\src\Unit1.pas=C:\delphi\Siagri\src\DM\UdtmProdutorDistribuidorLimite.pas</Transaction>
+    <Transaction>2020/05/24 16:54:12.547.dfm,C:\delphi\Siagri\src\Unit1.dfm=C:\delphi\Siagri\src\DM\UdtmProdutorDistribuidorLimite.dfm</Transaction>
+    <Transaction>2020/05/24 20:54:37.138.pas,C:\delphi\Siagri\src\Unit1.pas=C:\delphi\Siagri\src\Base\UfrmBaseModal.pas</Transaction>
+    <Transaction>2020/05/24 20:54:37.138.dfm,C:\delphi\Siagri\src\Unit1.dfm=C:\delphi\Siagri\src\Base\UfrmBaseModal.dfm</Transaction>
+    <Transaction>2020/05/24 20:56:37.372.pas,C:\delphi\Siagri\src\Unit1.pas=C:\delphi\Siagri\src\Cadastro\UfrmInformarLimiteDistribuidor.pas</Transaction>
+    <Transaction>2020/05/24 20:56:37.372.dfm,C:\delphi\Siagri\src\Unit1.dfm=C:\delphi\Siagri\src\Cadastro\UfrmInformarLimiteDistribuidor.dfm</Transaction>
+    <Transaction>2020/05/24 21:02:05.653.pas,C:\delphi\Siagri\src\Unit1.pas=C:\delphi\Siagri\src\Base\UfrmPesquisaBase.pas</Transaction>
+    <Transaction>2020/05/24 21:02:05.653.dfm,C:\delphi\Siagri\src\Unit1.dfm=C:\delphi\Siagri\src\Base\UfrmPesquisaBase.dfm</Transaction>
+    <Transaction>2020/05/24 21:11:27.027.pas,C:\delphi\Siagri\src\Unit1.pas=C:\delphi\Siagri\src\Pesquisa\UfrmPesquisaDistribuidor.pas</Transaction>
+    <Transaction>2020/05/24 21:11:27.027.dfm,C:\delphi\Siagri\src\Unit1.dfm=C:\delphi\Siagri\src\Pesquisa\UfrmPesquisaDistribuidor.dfm</Transaction>
+    <Transaction>2020/05/25 01:19:06.939.pas,C:\delphi\Siagri\src\Unit1.pas=C:\delphi\Siagri\src\Cadastro\UfrmCadastroNegociacao.pas</Transaction>
+    <Transaction>2020/05/25 01:19:06.939.dfm,C:\delphi\Siagri\src\Unit1.dfm=C:\delphi\Siagri\src\Cadastro\UfrmCadastroNegociacao.dfm</Transaction>
+    <Transaction>2020/05/25 01:21:35.596.pas,C:\delphi\Siagri\src\Unit1.pas=C:\delphi\Siagri\src\DM\UdtmNegociacaoProduto.pas</Transaction>
+    <Transaction>2020/05/25 01:21:35.596.dfm,C:\delphi\Siagri\src\Unit1.dfm=C:\delphi\Siagri\src\DM\UdtmNegociacaoProduto.dfm</Transaction>
+    <Transaction>2020/05/25 01:40:35.362.pas,C:\delphi\Siagri\src\Unit1.pas=C:\delphi\Siagri\src\Pesquisa\UfrmPesquisaProdutor.pas</Transaction>
+    <Transaction>2020/05/25 01:40:35.362.dfm,C:\delphi\Siagri\src\Unit1.dfm=C:\delphi\Siagri\src\Pesquisa\UfrmPesquisaProdutor.dfm</Transaction>
+    <Transaction>2020/05/25 01:41:27.355.pas,C:\delphi\Siagri\src\Unit1.pas=C:\delphi\Siagri\src\Pesquisa\UfrmPesquisaProduto.pas</Transaction>
+    <Transaction>2020/05/25 01:41:27.355.dfm,C:\delphi\Siagri\src\Unit1.dfm=C:\delphi\Siagri\src\Pesquisa\UfrmPesquisaProduto.dfm</Transaction>
+    <Transaction>2020/05/25 02:21:27.099.pas,C:\delphi\Siagri\src\Unit1.pas=C:\delphi\Siagri\src\Cadastro\UfrmInformarProdutoNegociacao.pas</Transaction>
+    <Transaction>2020/05/25 02:21:27.099.dfm,C:\delphi\Siagri\src\Unit1.dfm=C:\delphi\Siagri\src\Cadastro\UfrmInformarProdutoNegociacao.dfm</Transaction>
+    <Transaction>2020/05/25 09:56:03.111.pas,C:\delphi\Siagri\src\Unit1.pas=C:\delphi\Siagri\src\Cadastro\UfrmManutencaoNegociacao.pas</Transaction>
+    <Transaction>2020/05/25 09:56:03.111.dfm,C:\delphi\Siagri\src\Unit1.dfm=C:\delphi\Siagri\src\Cadastro\UfrmManutencaoNegociacao.dfm</Transaction>
+    <Transaction>2020/05/25 09:56:44.148.pas,C:\delphi\Siagri\src\Unit1.pas=C:\delphi\Siagri\src\Consulta\UfrmConsultaNegociacao.pas</Transaction>
+    <Transaction>2020/05/25 09:56:44.148.dfm,C:\delphi\Siagri\src\Unit1.dfm=C:\delphi\Siagri\src\Consulta\UfrmConsultaNegociacao.dfm</Transaction>
+    <Transaction>2020/05/25 15:29:42.830.pas,C:\delphi\Siagri\src\Unit1.pas=C:\delphi\Siagri\src\Relatorio\UfrmRelatorioNegociacao.pas</Transaction>
+    <Transaction>2020/05/25 15:29:42.830.dfm,C:\delphi\Siagri\src\Unit1.dfm=C:\delphi\Siagri\src\Relatorio\UfrmRelatorioNegociacao.dfm</Transaction>
+  </Transactions>
+</BorlandProject>
