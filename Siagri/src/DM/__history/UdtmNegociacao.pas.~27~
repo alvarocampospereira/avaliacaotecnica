@@ -1,0 +1,157 @@
+unit UdtmNegociacao;
+
+interface
+
+uses
+  SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr;
+
+type
+  TdtmNegociacao = class(TDataModule)
+    sdsNegociacao: TSQLDataSet;
+    dspNegociacao: TDataSetProvider;
+    cdsNegociacao: TClientDataSet;
+    sdsNegociacaoID_NEGOCIACAO: TIntegerField;
+    sdsNegociacaoID_PRODUTOR: TIntegerField;
+    sdsNegociacaoID_DISTRIBUIDOR: TIntegerField;
+    sdsNegociacaoSTATUS: TStringField;
+    sdsNegociacaoDATACADASTRO: TDateField;
+    sdsNegociacaoDATAAPROVACAO: TDateField;
+    sdsNegociacaoDATACONCLUSAO: TDateField;
+    sdsNegociacaoDATACANCELAMENTO: TDateField;
+    sdsNegociacaoVALORTOTAL: TFMTBCDField;
+    cdsNegociacaoID_NEGOCIACAO: TIntegerField;
+    cdsNegociacaoID_PRODUTOR: TIntegerField;
+    cdsNegociacaoID_DISTRIBUIDOR: TIntegerField;
+    cdsNegociacaoSTATUS: TStringField;
+    cdsNegociacaoDATACADASTRO: TDateField;
+    cdsNegociacaoDATAAPROVACAO: TDateField;
+    cdsNegociacaoDATACONCLUSAO: TDateField;
+    cdsNegociacaoDATACANCELAMENTO: TDateField;
+    cdsNegociacaoVALORTOTAL: TFMTBCDField;
+    cdsNegociacaoDescricaoStatus: TStringField;
+    sdsConsultaNeg: TSQLDataSet;
+    dspConsultaNeg: TDataSetProvider;
+    cdsConsultaNeg: TClientDataSet;
+    sdsConsultaNegSTATUS: TStringField;
+    sdsConsultaNegID_PRODUTOR: TIntegerField;
+    sdsConsultaNegNOMEPRODUTOR: TStringField;
+    sdsConsultaNegID_DISTRIBUIDOR: TIntegerField;
+    sdsConsultaNegNOMEDISTRIBUIDOR: TStringField;
+    sdsConsultaNegDATACADASTRO: TDateField;
+    sdsConsultaNegVALORTOTAL: TFMTBCDField;
+    sdsConsultaNegDATAAPROVACAO: TDateField;
+    sdsConsultaNegDATACONCLUSAO: TDateField;
+    sdsConsultaNegDATACANCELAMENTO: TDateField;
+    cdsConsultaNegSTATUS: TStringField;
+    cdsConsultaNegID_PRODUTOR: TIntegerField;
+    cdsConsultaNegNOMEPRODUTOR: TStringField;
+    cdsConsultaNegID_DISTRIBUIDOR: TIntegerField;
+    cdsConsultaNegNOMEDISTRIBUIDOR: TStringField;
+    cdsConsultaNegDATACADASTRO: TDateField;
+    cdsConsultaNegVALORTOTAL: TFMTBCDField;
+    cdsConsultaNegDATAAPROVACAO: TDateField;
+    cdsConsultaNegDATACONCLUSAO: TDateField;
+    cdsConsultaNegDATACANCELAMENTO: TDateField;
+    cdsConsultaNegDescricaoStatus: TStringField;
+    sdsNegociacaoCODIGOCONTRATO: TIntegerField;
+    cdsNegociacaoCODIGOCONTRATO: TIntegerField;
+    procedure cdsConsultaNegCalcFields(DataSet: TDataSet);
+    procedure cdsNegociacaoVALORTOTALGetText(Sender: TField; var Text: string;
+      DisplayText: Boolean);
+    procedure cdsNegociacaoCalcFields(DataSet: TDataSet);
+    procedure cdsNegociacaoAfterInsert(DataSet: TDataSet);
+    procedure cdsNegociacaoBeforePost(DataSet: TDataSet);
+  private
+    { Private declarations }
+
+  public
+    { Public declarations }
+    function obterNomeStatus(sStatus: String): String;
+    procedure alterarStatusNegociacao(idNegociacao: Integer;
+      sNovoStatus: String);
+  end;
+
+var
+  dtmNegociacao: TdtmNegociacao;
+
+implementation
+
+uses UdtmPrincipal;
+
+{$R *.dfm}
+
+procedure TdtmNegociacao.alterarStatusNegociacao(idNegociacao: Integer;
+  sNovoStatus: String);
+var sData: String;
+begin
+  if sNovoStatus = 'A' then
+    sData := 'DATAAPROVACAO'
+  else
+  if sNovoStatus = 'U' then
+    sData := 'DATACONCLUSAO'
+  else
+    sData := 'DATACANCELAMENTO';
+  with cdsConsultaNeg do
+   begin
+    Close;
+    CommandText := 'UPDATE NEGOCIACAO SET ' + sData +
+      ' = CAST (''NOW'' AS DATE), STATUS = ' + QuotedStr(sNovoStatus) +
+      ' WHERE ID_NEGOCIACAO = ' + IntToStr(idNegociacao);
+    Execute;
+   end;
+end;
+
+procedure TdtmNegociacao.cdsConsultaNegCalcFields(DataSet: TDataSet);
+begin
+  cdsConsultaNegDescricaoStatus.AsString := obterNomeStatus(cdsConsultaNegSTATUS.AsString);
+end;
+
+procedure TdtmNegociacao.cdsNegociacaoAfterInsert(DataSet: TDataSet);
+begin
+  cdsNegociacaoSTATUS.AsString := 'P';
+  cdsNegociacaoDATACADASTRO.AsDateTime := Date;
+  cdsNegociacaoVALORTOTAL.AsCurrency := 0;
+end;
+
+procedure TdtmNegociacao.cdsNegociacaoBeforePost(DataSet: TDataSet);
+begin
+  if cdsNegociacaoID_PRODUTOR.AsInteger = 0 then
+    raise exception.Create('Produtor não informado!');
+  if cdsNegociacaoID_DISTRIBUIDOR.AsInteger = 0 then
+    raise exception.Create('Distribuidor não informado!');
+
+  if cdsNegociacaoID_NEGOCIACAO.AsInteger = 0 then
+    begin
+      cdsNegociacaoID_NEGOCIACAO.ReadOnly := False;
+      cdsNegociacaoID_NEGOCIACAO.AsInteger := dtmPrincipal.ObterGenID('GEN_NEGOCIACAO');
+      cdsNegociacaoID_NEGOCIACAO.ReadOnly := True;
+    end;
+end;
+
+procedure TdtmNegociacao.cdsNegociacaoCalcFields(DataSet: TDataSet);
+begin
+  cdsNegociacaoDescricaoStatus.AsString := obterNomeStatus(cdsNegociacaoSTATUS.AsString);
+end;
+
+procedure TdtmNegociacao.cdsNegociacaoVALORTOTALGetText(Sender: TField;
+  var Text: string; DisplayText: Boolean);
+begin
+  if sender.AsString <> '' Then
+    text:=FormatFloat('#0.00',sender.AsFloat);
+end;
+
+function TdtmNegociacao.obterNomeStatus(sStatus: String): String;
+begin
+  if sStatus = 'P' then
+    Result := 'PENDENTE'
+  else
+  if sStatus = 'A' then
+    Result := 'APROVADO'
+  else
+  if sStatus = 'C' then
+    Result := 'CANCELADO'
+  else
+    Result := 'CONCLUIDO'
+end;
+
+end.

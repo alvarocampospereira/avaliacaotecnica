@@ -1,0 +1,185 @@
+object dtmNegociacaoProduto: TdtmNegociacaoProduto
+  OldCreateOrder = False
+  Height = 261
+  Width = 335
+  object sdsNegProduto: TSQLDataSet
+    SchemaName = 'sysdba'
+    CommandText = 'SELECT * FROM NEGOCIACAOPRODUTO'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dtmPrincipal.cntConexao
+    Left = 40
+    Top = 32
+    object sdsNegProdutoID_NEGOCIACAOPRODUTO: TIntegerField
+      FieldName = 'ID_NEGOCIACAOPRODUTO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sdsNegProdutoID_NEGOCIACAO: TIntegerField
+      FieldName = 'ID_NEGOCIACAO'
+      ProviderFlags = [pfInUpdate]
+      Required = True
+    end
+    object sdsNegProdutoID_PRODUTO: TIntegerField
+      FieldName = 'ID_PRODUTO'
+      ProviderFlags = [pfInUpdate]
+      Required = True
+    end
+    object sdsNegProdutoVALORPRODUTO: TFMTBCDField
+      FieldName = 'VALORPRODUTO'
+      ProviderFlags = [pfInUpdate]
+      Precision = 15
+      Size = 2
+    end
+    object sdsNegProdutoQUANTIDADE: TFMTBCDField
+      FieldName = 'QUANTIDADE'
+      ProviderFlags = [pfInUpdate]
+      Precision = 15
+      Size = 2
+    end
+    object sdsNegProdutoVALORTOTALPRODUTO: TFMTBCDField
+      FieldName = 'VALORTOTALPRODUTO'
+      ProviderFlags = [pfInUpdate]
+      Precision = 15
+      Size = 2
+    end
+  end
+  object dspNetProduto: TDataSetProvider
+    DataSet = sdsNegProduto
+    Options = [poAllowCommandText, poUseQuoteChar]
+    UpdateMode = upWhereKeyOnly
+    Left = 40
+    Top = 104
+  end
+  object cdsNegProduto: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspNetProduto'
+    BeforePost = cdsNegProdutoBeforePost
+    Left = 40
+    Top = 168
+    object cdsNegProdutoID_NEGOCIACAOPRODUTO: TIntegerField
+      FieldName = 'ID_NEGOCIACAOPRODUTO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsNegProdutoID_NEGOCIACAO: TIntegerField
+      FieldName = 'ID_NEGOCIACAO'
+      ProviderFlags = [pfInUpdate]
+      Required = True
+    end
+    object cdsNegProdutoID_PRODUTO: TIntegerField
+      FieldName = 'ID_PRODUTO'
+      ProviderFlags = [pfInUpdate]
+      Required = True
+    end
+    object cdsNegProdutoVALORPRODUTO: TFMTBCDField
+      FieldName = 'VALORPRODUTO'
+      ProviderFlags = [pfInUpdate]
+      Precision = 15
+      Size = 2
+    end
+    object cdsNegProdutoQUANTIDADE: TFMTBCDField
+      FieldName = 'QUANTIDADE'
+      ProviderFlags = [pfInUpdate]
+      Precision = 15
+      Size = 2
+    end
+    object cdsNegProdutoVALORTOTALPRODUTO: TFMTBCDField
+      FieldName = 'VALORTOTALPRODUTO'
+      ProviderFlags = [pfInUpdate]
+      Precision = 15
+      Size = 2
+    end
+  end
+  object SQLDataSet1: TSQLDataSet
+    SchemaName = 'sysdba'
+    CommandText = 'SELECT * FROM NEGOCIACAOPRODUTO'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dtmPrincipal.cntConexao
+    Left = 136
+    Top = 32
+    object IntegerField1: TIntegerField
+      FieldName = 'ID_NEGOCIACAOPRODUTO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object IntegerField2: TIntegerField
+      FieldName = 'ID_NEGOCIACAO'
+      ProviderFlags = [pfInUpdate]
+      Required = True
+    end
+    object IntegerField3: TIntegerField
+      FieldName = 'ID_PRODUTO'
+      ProviderFlags = [pfInUpdate]
+      Required = True
+    end
+    object FMTBCDField1: TFMTBCDField
+      FieldName = 'VALORPRODUTO'
+      ProviderFlags = [pfInUpdate]
+      Precision = 15
+      Size = 2
+    end
+    object FMTBCDField2: TFMTBCDField
+      FieldName = 'QUANTIDADE'
+      ProviderFlags = [pfInUpdate]
+      Precision = 15
+      Size = 2
+    end
+    object FMTBCDField3: TFMTBCDField
+      FieldName = 'VALORTOTALPRODUTO'
+      ProviderFlags = [pfInUpdate]
+      Precision = 15
+      Size = 2
+    end
+  end
+  object DataSetProvider1: TDataSetProvider
+    DataSet = SQLDataSet1
+    Options = [poAllowCommandText, poUseQuoteChar]
+    UpdateMode = upWhereKeyOnly
+    Left = 136
+    Top = 104
+  end
+  object ClientDataSet1: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspNetProduto'
+    BeforePost = cdsNegProdutoBeforePost
+    Left = 136
+    Top = 168
+    object IntegerField4: TIntegerField
+      FieldName = 'ID_NEGOCIACAOPRODUTO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object IntegerField5: TIntegerField
+      FieldName = 'ID_NEGOCIACAO'
+      ProviderFlags = [pfInUpdate]
+      Required = True
+    end
+    object IntegerField6: TIntegerField
+      FieldName = 'ID_PRODUTO'
+      ProviderFlags = [pfInUpdate]
+      Required = True
+    end
+    object FMTBCDField4: TFMTBCDField
+      FieldName = 'VALORPRODUTO'
+      ProviderFlags = [pfInUpdate]
+      Precision = 15
+      Size = 2
+    end
+    object FMTBCDField5: TFMTBCDField
+      FieldName = 'QUANTIDADE'
+      ProviderFlags = [pfInUpdate]
+      Precision = 15
+      Size = 2
+    end
+    object FMTBCDField6: TFMTBCDField
+      FieldName = 'VALORTOTALPRODUTO'
+      ProviderFlags = [pfInUpdate]
+      Precision = 15
+      Size = 2
+    end
+  end
+end

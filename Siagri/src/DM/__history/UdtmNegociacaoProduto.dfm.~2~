@@ -1,0 +1,5 @@
+object dtmNegociacaoProduto: TdtmNegociacaoProduto
+  OldCreateOrder = False
+  Height = 261
+  Width = 335
+end

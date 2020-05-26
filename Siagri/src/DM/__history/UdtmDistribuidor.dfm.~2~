@@ -1,0 +1,61 @@
+object dtmDistribuidor: TdtmDistribuidor
+  OldCreateOrder = False
+  Height = 312
+  Width = 363
+  object sdsProduto: TSQLDataSet
+    SchemaName = 'sysdba'
+    CommandText = 'SELECT * FROM DISTRIBUIDOR'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dtmPrincipal.cntConexao
+    Left = 40
+    Top = 32
+    object sdsProdutoID_DISTRIBUIDOR: TIntegerField
+      FieldName = 'ID_DISTRIBUIDOR'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
+    object sdsProdutoNOMEDISTRIBUIDOR: TStringField
+      FieldName = 'NOMEDISTRIBUIDOR'
+      ProviderFlags = [pfInUpdate]
+      Size = 50
+    end
+    object sdsProdutoCNPJDISTRUIBUIDOR: TStringField
+      FieldName = 'CNPJDISTRUIBUIDOR'
+      ProviderFlags = [pfInUpdate]
+      Size = 18
+    end
+  end
+  object dspProduto: TDataSetProvider
+    DataSet = sdsProduto
+    UpdateMode = upWhereKeyOnly
+    Left = 40
+    Top = 104
+  end
+  object cdsProduto: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspProduto'
+    Left = 40
+    Top = 168
+    object cdsProdutoID_PRODUTO: TIntegerField
+      DisplayLabel = 'C'#243'digo'
+      FieldName = 'ID_PRODUTO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object cdsProdutoNOMEPRODUTO: TStringField
+      DisplayLabel = 'Nome Produto'
+      FieldName = 'NOMEPRODUTO'
+      ProviderFlags = [pfInUpdate]
+      Size = 50
+    end
+    object cdsProdutoVALORVENDA: TFMTBCDField
+      DisplayLabel = 'Valor Venda'
+      FieldName = 'VALORVENDA'
+      ProviderFlags = [pfInUpdate]
+      DisplayFormat = '#,##0.00'
+      Precision = 15
+      Size = 2
+    end
+  end
+end

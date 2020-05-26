@@ -1,0 +1,131 @@
+object dtmNegociacao: TdtmNegociacao
+  OldCreateOrder = False
+  Height = 319
+  Width = 367
+  object sdsNegociacao: TSQLDataSet
+    SchemaName = 'sysdba'
+    CommandText = 'SELECT * FROM NEGOCIACAO'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dtmPrincipal.cntConexao
+    Left = 40
+    Top = 32
+    object sdsNegociacaoID_NEGOCIACAO: TIntegerField
+      FieldName = 'ID_NEGOCIACAO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
+    object sdsNegociacaoID_PRODUTOR: TIntegerField
+      FieldName = 'ID_PRODUTOR'
+      ProviderFlags = [pfInUpdate]
+      Required = True
+    end
+    object sdsNegociacaoID_DISTRIBUIDOR: TIntegerField
+      FieldName = 'ID_DISTRIBUIDOR'
+      ProviderFlags = [pfInUpdate]
+      Required = True
+    end
+    object sdsNegociacaoSTATUS: TStringField
+      FieldName = 'STATUS'
+      ProviderFlags = [pfInUpdate]
+      FixedChar = True
+      Size = 1
+    end
+    object sdsNegociacaoDATACADASTRO: TDateField
+      FieldName = 'DATACADASTRO'
+      ProviderFlags = [pfInUpdate]
+    end
+    object sdsNegociacaoDATAAPROVACAO: TDateField
+      FieldName = 'DATAAPROVACAO'
+      ProviderFlags = [pfInUpdate]
+    end
+    object sdsNegociacaoDATACONCLUSAO: TDateField
+      FieldName = 'DATACONCLUSAO'
+      ProviderFlags = [pfInUpdate]
+    end
+    object sdsNegociacaoDATACANCELAMENTO: TDateField
+      FieldName = 'DATACANCELAMENTO'
+      ProviderFlags = [pfInUpdate]
+    end
+    object sdsNegociacaoVALORTOTAL: TFMTBCDField
+      FieldName = 'VALORTOTAL'
+      ProviderFlags = [pfInUpdate]
+      Precision = 15
+      Size = 2
+    end
+  end
+  object dspNegociacao: TDataSetProvider
+    DataSet = sdsNegociacao
+    Options = [poAllowCommandText, poUseQuoteChar]
+    UpdateMode = upWhereKeyOnly
+    Left = 40
+    Top = 104
+  end
+  object cdsNegociacao: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspNegociacao'
+    AfterInsert = cdsNegociacaoAfterInsert
+    BeforePost = cdsNegociacaoBeforePost
+    OnCalcFields = cdsNegociacaoCalcFields
+    Left = 40
+    Top = 168
+    object cdsNegociacaoID_NEGOCIACAO: TIntegerField
+      DisplayLabel = 'C'#243'digo'
+      FieldName = 'ID_NEGOCIACAO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
+    object cdsNegociacaoID_PRODUTOR: TIntegerField
+      DisplayLabel = 'C'#243'd Produtor'
+      FieldName = 'ID_PRODUTOR'
+      ProviderFlags = [pfInUpdate]
+      Required = True
+    end
+    object cdsNegociacaoID_DISTRIBUIDOR: TIntegerField
+      DisplayLabel = 'C'#243'd Distribuidor'
+      FieldName = 'ID_DISTRIBUIDOR'
+      ProviderFlags = [pfInUpdate]
+      Required = True
+    end
+    object cdsNegociacaoSTATUS: TStringField
+      DisplayLabel = 'Status'
+      FieldName = 'STATUS'
+      ProviderFlags = [pfInUpdate]
+      FixedChar = True
+      Size = 1
+    end
+    object cdsNegociacaoDescricaoStatus: TStringField
+      DisplayLabel = 'Descri'#231#227'oo Status'
+      FieldKind = fkCalculated
+      FieldName = 'DescricaoStatus'
+      Calculated = True
+    end
+    object cdsNegociacaoDATACADASTRO: TDateField
+      DisplayLabel = 'Data Cadastro'
+      FieldName = 'DATACADASTRO'
+      ProviderFlags = [pfInUpdate]
+    end
+    object cdsNegociacaoDATAAPROVACAO: TDateField
+      DisplayLabel = 'Data Aprova'#231#227'o'
+      FieldName = 'DATAAPROVACAO'
+      ProviderFlags = [pfInUpdate]
+    end
+    object cdsNegociacaoDATACONCLUSAO: TDateField
+      DisplayLabel = 'Data Conclus'#227'o'
+      FieldName = 'DATACONCLUSAO'
+      ProviderFlags = [pfInUpdate]
+    end
+    object cdsNegociacaoDATACANCELAMENTO: TDateField
+      DisplayLabel = 'Data Cancelamento'
+      FieldName = 'DATACANCELAMENTO'
+      ProviderFlags = [pfInUpdate]
+    end
+    object cdsNegociacaoVALORTOTAL: TFMTBCDField
+      DisplayLabel = 'Valor Total'
+      FieldName = 'VALORTOTAL'
+      ProviderFlags = [pfInUpdate]
+      OnGetText = cdsNegociacaoVALORTOTALGetText
+      Precision = 15
+      Size = 2
+    end
+  end
+end

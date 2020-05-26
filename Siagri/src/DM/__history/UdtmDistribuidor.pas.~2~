@@ -1,0 +1,32 @@
+unit UdtmDistribuidor;
+
+interface
+
+uses
+  SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr;
+
+type
+  TdtmDistribuidor = class(TDataModule)
+    sdsProduto: TSQLDataSet;
+    dspProduto: TDataSetProvider;
+    cdsProduto: TClientDataSet;
+    cdsProdutoID_PRODUTO: TIntegerField;
+    cdsProdutoNOMEPRODUTO: TStringField;
+    cdsProdutoVALORVENDA: TFMTBCDField;
+    sdsProdutoID_DISTRIBUIDOR: TIntegerField;
+    sdsProdutoNOMEDISTRIBUIDOR: TStringField;
+    sdsProdutoCNPJDISTRUIBUIDOR: TStringField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  dtmDistribuidor: TdtmDistribuidor;
+
+implementation
+
+{$R *.dfm}
+
+end.

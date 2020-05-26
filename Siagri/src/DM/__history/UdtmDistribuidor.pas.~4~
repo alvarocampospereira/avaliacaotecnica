@@ -1,0 +1,45 @@
+unit UdtmDistribuidor;
+
+interface
+
+uses
+  SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr;
+
+type
+  TdtmDistribuidor = class(TDataModule)
+    sdsDistribuidor: TSQLDataSet;
+    dspDistribuidor: TDataSetProvider;
+    cdsDistribuidor: TClientDataSet;
+    sdsDistribuidorID_DISTRIBUIDOR: TIntegerField;
+    sdsDistribuidorNOMEDISTRIBUIDOR: TStringField;
+    sdsDistribuidorCNPJDISTRUIBUIDOR: TStringField;
+    cdsDistribuidorID_DISTRIBUIDOR: TIntegerField;
+    cdsDistribuidorNOMEDISTRIBUIDOR: TStringField;
+    cdsDistribuidorCNPJDISTRUIBUIDOR: TStringField;
+    procedure cdsDistribuidorBeforePost(DataSet: TDataSet);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  dtmDistribuidor: TdtmDistribuidor;
+
+implementation
+
+{$R *.dfm}
+
+procedure TdtmDistribuidor.cdsDistribuidorBeforePost(DataSet: TDataSet);
+begin
+  if Trim(cdsDistribuidorNOMEDISTRIBUIDOR.AsString) = '' then
+    raise exception.Create('Nome do distribuidor não informado!');
+  if Trim(cdsDistribuidorCNPJDISTRUIBUIDOR.AsString) = '' then
+    raise exception.Create('Cnpj do distribuidor não informado!');
+
+  cdsProdutoID_PRODUTO.ReadOnly := False;
+  cdsProdutoID_PRODUTO.AsInteger := dtmPrincipal.ObterGenID('GEN_PRODUTO');
+  cdsProdutoID_PRODUTO.ReadOnly := True;
+end;
+
+end.

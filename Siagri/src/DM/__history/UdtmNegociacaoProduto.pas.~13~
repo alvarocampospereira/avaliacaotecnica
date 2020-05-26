@@ -1,0 +1,84 @@
+unit UdtmNegociacaoProduto;
+
+interface
+
+uses
+  SysUtils, Classes, FMTBcd, DBClient, Provider, DB, SqlExpr, Variants,Dialogs;
+
+type
+  TdtmNegociacaoProduto = class(TDataModule)
+    sdsNegProduto: TSQLDataSet;
+    dspNetProduto: TDataSetProvider;
+    cdsNegProduto: TClientDataSet;
+    sdsNegProdutoID_NEGOCIACAOPRODUTO: TIntegerField;
+    sdsNegProdutoID_NEGOCIACAO: TIntegerField;
+    sdsNegProdutoID_PRODUTO: TIntegerField;
+    sdsNegProdutoVALORPRODUTO: TFMTBCDField;
+    sdsNegProdutoQUANTIDADE: TFMTBCDField;
+    sdsNegProdutoVALORTOTALPRODUTO: TFMTBCDField;
+    cdsNegProdutoID_NEGOCIACAOPRODUTO: TIntegerField;
+    cdsNegProdutoID_NEGOCIACAO: TIntegerField;
+    cdsNegProdutoID_PRODUTO: TIntegerField;
+    cdsNegProdutoVALORPRODUTO: TFMTBCDField;
+    cdsNegProdutoQUANTIDADE: TFMTBCDField;
+    cdsNegProdutoVALORTOTALPRODUTO: TFMTBCDField;
+    procedure cdsNegProdutoBeforePost(DataSet: TDataSet);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure inserirNegociacaoProduto(idNegociacao, idProduto: Integer;
+      cQuantidade, cValorUnitario: Currency);
+    procedure excluirNegociacaoProduto(idNegociacaoProd: Integer);
+  end;
+
+var
+  dtmNegociacaoProduto: TdtmNegociacaoProduto;
+
+implementation
+
+uses UdtmPrincipal;
+
+{$R *.dfm}
+
+{ TdtmNegociacaoProduto }
+
+procedure TdtmNegociacaoProduto.cdsNegProdutoBeforePost(DataSet: TDataSet);
+begin
+  if cdsNegProdutoID_NEGOCIACAOPRODUTO.AsInteger = 0 then
+    begin
+      cdsNegProdutoID_NEGOCIACAOPRODUTO.ReadOnly := False;
+      cdsNegProdutoID_NEGOCIACAOPRODUTO.AsInteger := dtmPrincipal.ObterGenID('GEN_NEGOCIACAOPRODUTO');
+      cdsNegProdutoID_NEGOCIACAOPRODUTO.ReadOnly := True;
+    end;
+end;
+
+procedure TdtmNegociacaoProduto.excluirNegociacaoProduto(
+  idNegociacaoProd: Integer);
+begin
+  if cdsNegProduto.Locate('ID_NEGOCIACAOPRODUTO', VarArrayOf([idNegociacaoProd]), [loCaseInsensitive]) then
+    begin
+      cdsNegProduto.Delete;
+      cdsNegProduto.ApplyUpdates(-1);
+    end;
+end;
+
+procedure TdtmNegociacaoProduto.inserirNegociacaoProduto(idNegociacao,
+  idProduto: Integer; cQuantidade, cValorUnitario: Currency);
+begin
+  // verifica se já não esta cadastrado
+  if not cdsNegProduto.Locate('ID_NEGOCIACAO;ID_PRODUTO', VarArrayOf([idNegociacao,idProduto]), [loCaseInsensitive]) then
+    begin
+      cdsNegProduto.Append;
+      cdsNegProdutoID_NEGOCIACAO.AsInteger := idNegociacao;
+      cdsNegProdutoID_PRODUTO.AsInteger := idProduto;
+      cdsNegProdutoQUANTIDADE.AsCurrency := cQuantidade;
+      cdsNegProdutoVALORPRODUTO.AsCurrency := cValorUnitario;
+      cdsNegProduto.Post;
+      cdsNegProduto.ApplyUpdates(-1);
+    end
+  else
+    MessageDlg('Produto já cadastrado para a negociação atual!',mtWarning, [mbOK], 0);
+end;
+
+end.
