@@ -1,0 +1,192 @@
+SET SQL DIALECT 3;
+
+SET NAMES NONE;
+
+CREATE DATABASE '127.0.0.1:C:\delphi\Siagri\data\BD.fdb'
+USER 'SYSDBA' PASSWORD 'masterkey'
+PAGE_SIZE 16384
+DEFAULT CHARACTER SET NONE;
+
+
+CREATE DOMAIN INTEIRO AS
+INTEGER;
+CREATE DOMAIN INTEIRONOTNULL AS
+INTEGER
+NOT NULL;
+CREATE DOMAIN TEXTO50 AS
+VARCHAR(50);
+CREATE DOMAIN NUMERO2 AS
+NUMERIC(15,2);
+
+CREATE DOMAIN TEXTO18 AS
+VARCHAR(18);
+
+CREATE DOMAIN DATA AS
+DATE;
+
+CREATE DOMAIN TEXTO1 AS
+CHAR(1);
+
+
+CREATE TABLE PRODUTO (
+    ID_PRODUTO INTEIRONOTNULL NOT NULL,
+    NOMEPRODUTO TEXTO50,
+    VALORVENDA NUMERO2);
+alter table PRODUTO
+add constraint PK_PRODUTO
+primary key (ID_PRODUTO);
+CREATE SEQUENCE GEN_PRODUTO;
+SET TERM ^ ;
+
+create trigger produto_bi for produto
+active before insert position 0
+as
+begin
+  if (new.id_produto is null) then
+    new.id_produto = gen_id(gen_produto,1);
+end
+^
+
+SET TERM ; ^
+
+CREATE TABLE PRODUTOR (
+    ID_PRODUTOR INTEIRONOTNULL NOT NULL,
+    NOMEPRODUTOR TEXTO50,
+    CPFCNPJPRODUTOR TEXTO18);
+alter table PRODUTOR
+add constraint PK_PRODUTOR
+primary key (ID_PRODUTOR);
+CREATE SEQUENCE GEN_PRODUTOR;
+SET TERM ^ ;
+
+create trigger produtor_bi for produtor
+active before insert position 0
+as
+begin
+  if (new.id_produtor is null) then
+    new.id_produtor = gen_id(gen_produtor,1);
+end
+^
+
+SET TERM ; ^
+
+CREATE TABLE DISTRIBUIDOR (
+    ID_DISTRIBUIDOR INTEIRONOTNULL NOT NULL,
+    NOMEDISTRIBUIDOR TEXTO50,
+    CNPJDISTRUIBUIDOR TEXTO18);
+alter table DISTRIBUIDOR
+add constraint PK_DISTRIBUIDOR
+primary key (ID_DISTRIBUIDOR);
+CREATE SEQUENCE GEN_DISTRIBUIDOR;
+SET TERM ^ ;
+
+create trigger distribuidor_bi for distribuidor
+active before insert position 0
+as
+begin
+  if (new.id_distribuidor is null) then
+    new.id_distribuidor = gen_id(gen_distribuidor,1);
+end
+^
+
+SET TERM ; ^
+
+CREATE TABLE PRODUTORDISTRIBUIDORLIMITE (
+    ID_LIMITE INTEIRONOTNULL NOT NULL,
+    ID_PRODUTOR INTEIRONOTNULL,
+    ID_DISTRIBUIDOR INTEIRONOTNULL,
+    VALORLIMITE NUMERO2);
+alter table PRODUTORDISTRIBUIDORLIMITE
+add constraint PK_PRODUTORDISTRIBUIDORLIMITE
+primary key (ID_LIMITE);
+CREATE SEQUENCE GEN_PRODUTORDISTRIBUIDORLIMITE;
+SET TERM ^ ;
+
+create trigger produtordistribuidorlimite_bi for produtordistribuidorlimite
+active before insert position 0
+as
+begin
+  if (new.id_limite is null) then
+    new.id_limite = gen_id(gen_produtordistribuidorlimite,1);
+end
+^
+
+SET TERM ; ^
+
+
+alter table PRODUTORDISTRIBUIDORLIMITE
+add constraint FK_PRODUTORDISTRLIMITE_PROD
+foreign key (ID_PRODUTOR)
+references PRODUTOR(ID_PRODUTOR);
+
+alter table PRODUTORDISTRIBUIDORLIMITE
+add constraint FK_PRODUTORDISTRLIMITE_DISTR
+foreign key (ID_DISTRIBUIDOR)
+references DISTRIBUIDOR(ID_DISTRIBUIDOR);
+
+CREATE TABLE NEGOCIACAO (
+    ID_NEGOCIACAO INTEIRONOTNULL NOT NULL,
+    ID_PRODUTOR INTEIRONOTNULL,
+    ID_DISTRIBUIDOR INTEIRONOTNULL,
+    STATUS TEXTO1,
+    DATACADASTRO DATA,
+    DATAAPROVACAO DATA,
+    DATACONCLUSAO DATA,
+    DATACANCELAMENTO DATA,
+    VALORTOTAL NUMERO2,
+    CODIGOCONTRATO INTEIRO);
+alter table NEGOCIACAO
+add constraint PK_NEGOCIACAO
+primary key (ID_NEGOCIACAO);
+COMMENT ON COLUMN NEGOCIACAO.STATUS IS
+'P=PENDENTE; A=APROVADO, C=CANCELADO, U=CONCLUIDO';
+CREATE SEQUENCE GEN_NEGOCIACAO;
+SET TERM ^ ;
+
+create trigger negociacao_bi for negociacao
+active before insert position 0
+as
+begin
+  if (new.id_negociacao is null) then
+    new.id_negociacao = gen_id(gen_negociacao,1);
+end
+^
+
+SET TERM ; ^
+
+alter table NEGOCIACAO
+add constraint FK_NEGOCIACAO_DISTRIBUIDOR
+foreign key (ID_DISTRIBUIDOR)
+references DISTRIBUIDOR(ID_DISTRIBUIDOR);
+
+
+alter table NEGOCIACAO
+add constraint FK_NEGOCIACAO_PRODUTOR
+foreign key (ID_PRODUTOR)
+references PRODUTO(ID_PRODUTO);
+
+
+CREATE TABLE NEGOCIACAOPRODUTO (
+    ID_NEGOCIACAOPRODUTO INTEIRONOTNULL NOT NULL,
+    ID_NEGOCIACAO INTEIRONOTNULL,
+    ID_PRODUTO INTEIRONOTNULL,
+    VALORPRODUTO NUMERO2,
+    QUANTIDADE NUMERO2,
+    VALORTOTALPRODUTO COMPUTED BY (CAST((VALORPRODUTO * QUANTIDADE) AS NUMERIC(15,2))));
+alter table NEGOCIACAOPRODUTO
+add constraint PK_NEGOCIACAOPRODUTO
+primary key (ID_NEGOCIACAOPRODUTO);
+CREATE SEQUENCE GEN_NEGOCIACAOPRODUTO;
+SET TERM ^ ;
+
+create trigger negociacaoproduto_bi for negociacaoproduto
+active before insert position 0
+as
+begin
+  if (new.id_negociacaoproduto is null) then
+    new.id_negociacaoproduto = gen_id(gen_negociacaoproduto,1);
+end
+^
+
+SET TERM ; ^
+
