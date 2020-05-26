@@ -1,0 +1,33 @@
+unit UdtmPrincipal;
+
+interface
+
+uses
+  SysUtils, Classes, DBXpress, DB, SqlExpr, inifiles;
+
+type
+  TdtmPrincipal = class(TDataModule)
+    cntConexao: TSQLConnection;
+    procedure DataModuleCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  dtmPrincipal: TdtmPrincipal;
+
+implementation
+
+{$R *.dfm}
+
+procedure TdtmPrincipal.DataModuleCreate(Sender: TObject);
+var ini: TIniFile;
+begin
+  ini := TIniFile.Create(ExtractFilePath(ParamStr(0)) + 'config.ini');
+  cntConexao.Params.Values['Database'] := ini.ReadString('controlenegociacao','CaminhoBD','');
+  ini.Free;
+end;
+
+end.

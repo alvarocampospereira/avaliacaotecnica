@@ -1,0 +1,20 @@
+object dtmProduto: TdtmProduto
+  OldCreateOrder = False
+  Height = 246
+  Width = 280
+  object SQLDataSet1: TSQLDataSet
+    Params = <>
+    Left = 40
+    Top = 32
+  end
+  object DataSetProvider1: TDataSetProvider
+    Left = 40
+    Top = 104
+  end
+  object ClientDataSet1: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 40
+    Top = 168
+  end
+end

@@ -1,0 +1,31 @@
+unit UdtmProduto;
+
+interface
+
+uses
+  SysUtils, Classes, FMTBcd, DBClient, Provider, DB, SqlExpr;
+
+type
+  TdtmProduto = class(TDataModule)
+    sdsProduto: TSQLDataSet;
+    DataSetProvider1: TDataSetProvider;
+    ClientDataSet1: TClientDataSet;
+    sdsProdutoID_PRODUTO: TIntegerField;
+    sdsProdutoNOMEPRODUTO: TStringField;
+    sdsProdutoVALORVENDA: TFMTBCDField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  dtmProduto: TdtmProduto;
+
+implementation
+
+uses UdtmPrincipal;
+
+{$R *.dfm}
+
+end.

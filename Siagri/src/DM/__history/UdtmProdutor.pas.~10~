@@ -1,0 +1,55 @@
+unit UdtmProdutor;
+
+interface
+
+uses
+  SysUtils, Classes, FMTBcd, DBClient, Provider, DB, SqlExpr, udtmPrincipal;
+
+type
+  TdtmProdutor = class(TDataModule)
+    sdsProdutor: TSQLDataSet;
+    dspProdutor: TDataSetProvider;
+    cdsProdutor: TClientDataSet;
+    sdsProdutorID_PRODUTOR: TIntegerField;
+    sdsProdutorNOMEPRODUDOR: TStringField;
+    sdsProdutorCPFCNPJPRODUTOR: TStringField;
+    cdsProdutorID_PRODUTOR: TIntegerField;
+    cdsProdutorNOMEPRODUDOR: TStringField;
+    cdsProdutorCPFCNPJPRODUTOR: TStringField;
+    procedure cdsProdutorBeforePost(DataSet: TDataSet);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  dtmProdutor: TdtmProdutor;
+
+implementation
+
+{$R *.dfm}
+
+procedure TdtmProdutor.cdsProdutorBeforePost(DataSet: TDataSet);
+var sDoc: String;
+begin
+  if Trim(cdsProdutorNOMEPRODUDOR.AsString) = '' then
+    raise exception.Create('Nome do produtor não informado!');
+  if Trim(cdsProdutorCPFCNPJPRODUTOR.AsString) = '' then
+    raise exception.Create('Cnpj/Cpf não informado!');
+
+  sDoc := StringReplace(cdsProdutorCPFCNPJPRODUTOR.AsString, '.', '', [rfReplaceAll]);
+  sDoc := StringReplace(sDoc, '-', '', [rfReplaceAll]);
+  sDoc := StringReplace(sDoc, '/', '', [rfReplaceAll]);
+
+  if Length(sDoc) = 11 then
+    if not dtmPrincipal.CpfValido(sDoc) then
+      raise exception.Create('Cpf informado é inválido!')
+  else
+    if not dtmPrincipal.CnpjValido(sDoc) then
+      raise exception.Create('Cnpj informado é inválido!');
+
+  cdsProdutorID_PRODUTOR.AsInteger := dtmPrincipal.ObterGenID('GEN_PRODUTOR');
+end;
+
+end.

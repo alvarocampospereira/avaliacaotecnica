@@ -1,0 +1,98 @@
+unit UdtmPrincipal;
+
+interface
+
+uses
+  SysUtils, Classes, DBXpress, DB, SqlExpr, inifiles;
+
+type
+  TdtmPrincipal = class(TDataModule)
+    cntConexao: TSQLConnection;
+    procedure DataModuleCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    function CnpjValido(sCnpj: String): Boolean;
+    function CpfValido(sCpf: String): Boolean;
+  end;
+
+var
+  dtmPrincipal: TdtmPrincipal;
+
+implementation
+
+{$R *.dfm}
+
+function TdtmPrincipal.CnpjValido(sCnpj: String): Boolean;
+var   dig13, dig14: string;
+    sm, i, r, peso: integer;
+begin
+// length - retorna o tamanho da string do CNPJ (CNPJ é um número formado por 14 dígitos)
+  if ((sCnpj = '00000000000000') or (sCnpj = '11111111111111') or
+      (sCnpj = '22222222222222') or (sCnpj = '33333333333333') or
+      (sCnpj = '44444444444444') or (sCnpj = '55555555555555') or
+      (sCnpj = '66666666666666') or (sCnpj = '77777777777777') or
+      (sCnpj = '88888888888888') or (sCnpj = '99999999999999') or
+      (length(sCnpj) <> 14))
+     then begin
+            CnpjValido := false;
+            exit;
+          end;
+ 
+// "try" - protege o código para eventuais erros de conversão de tipo através da função "StrToInt"
+  try
+{ *-- Cálculo do 1o. Digito Verificador --* }
+    sm := 0;
+    peso := 2;
+    for i := 12 downto 1 do
+    begin
+// StrToInt converte o i-ésimo caractere do CNPJ em um número
+      sm := sm + (StrToInt(sCnpj[i]) * peso);
+      peso := peso + 1;
+      if (peso = 10)
+         then peso := 2;
+    end;
+    r := sm mod 11;
+    if ((r = 0) or (r = 1))
+       then dig13 := '0'
+    else str((11-r):1, dig13); // converte um número no respectivo caractere numérico
+ 
+{ *-- Cálculo do 2o. Digito Verificador --* }
+    sm := 0;
+    peso := 2;
+    for i := 13 downto 1 do
+    begin
+      sm := sm + (StrToInt(sCnpj[i]) * peso);
+      peso := peso + 1;
+      if (peso = 10)
+         then peso := 2;
+    end;
+    r := sm mod 11;
+    if ((r = 0) or (r = 1))
+       then dig14 := '0'
+    else str((11-r):1, dig14);
+ 
+{ Verifica se os digitos calculados conferem com os digitos informados. }
+    if ((dig13 = sCnpj[13]) and (dig14 = sCnpj[14]))
+       then CnpjValido := true
+    else CnpjValido := false;
+  except
+    CnpjValido := false
+  end;
+end;
+
+function TdtmPrincipal.CpfValido(sCpf: String): Boolean;
+begin
+
+end;
+
+procedure TdtmPrincipal.DataModuleCreate(Sender: TObject);
+var ini: TIniFile;
+begin
+  ini := TIniFile.Create(ExtractFilePath(ParamStr(0)) + 'config.ini');
+  cntConexao.Params.Values['Database'] := ini.ReadString('controlenegociacao','CaminhoBD','');
+  ini.Free;
+end;
+
+end.

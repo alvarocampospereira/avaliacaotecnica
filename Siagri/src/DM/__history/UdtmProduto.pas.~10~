@@ -1,0 +1,59 @@
+unit UdtmProduto;
+
+interface
+
+uses
+  SysUtils, Classes, FMTBcd, DBClient, Provider, DB, SqlExpr;
+
+type
+  TdtmProduto = class(TDataModule)
+    sdsProduto: TSQLDataSet;
+    dspProduto: TDataSetProvider;
+    cdsProduto: TClientDataSet;
+    sdsProdutoID_PRODUTO: TIntegerField;
+    sdsProdutoNOMEPRODUTO: TStringField;
+    sdsProdutoVALORVENDA: TFMTBCDField;
+    cdsProdutoID_PRODUTO: TIntegerField;
+    cdsProdutoNOMEPRODUTO: TStringField;
+    cdsProdutoVALORVENDA: TFMTBCDField;
+    procedure cdsProdutoVALORVENDAGetText(Sender: TField; var Text: string;
+      DisplayText: Boolean);
+    procedure cdsProdutoBeforePost(DataSet: TDataSet);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  dtmProduto: TdtmProduto;
+
+implementation
+
+uses UdtmPrincipal;
+
+{$R *.dfm}
+
+procedure TdtmProduto.cdsProdutoBeforePost(DataSet: TDataSet);
+begin
+  if Trim(cdsProdutoNOMEPRODUTO.AsString) = '' then
+    raise exception.Create('Nome do produto não informado!');
+  if cdsProdutoVALORVENDA.AsFloat = 0 then
+    raise exception.Create('Valor do produto não informado!');
+    
+  if cdsProdutoID_PRODUTO.AsInteger = 0 then
+    begin
+      cdsProdutoID_PRODUTO.ReadOnly := False;
+      cdsProdutoID_PRODUTO.AsInteger := dtmPrincipal.ObterGenID('GEN_PRODUTO');
+      cdsProdutoID_PRODUTO.ReadOnly := True;
+    end;
+end;
+
+procedure TdtmProduto.cdsProdutoVALORVENDAGetText(Sender: TField;
+  var Text: string; DisplayText: Boolean);
+begin
+    if sender.AsString <> '' Then
+    text:=FormatFloat('#0.00',sender.AsFloat);
+end;
+
+end.

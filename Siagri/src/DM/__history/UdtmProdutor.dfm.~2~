@@ -1,0 +1,27 @@
+object dtmProdutor: TdtmProdutor
+  OldCreateOrder = False
+  Height = 250
+  Width = 279
+  object sdsProdutor: TSQLDataSet
+    SchemaName = 'sysdba'
+    CommandText = 'SELECT * FROM PRODUTO'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dtmPrincipal.cntConexao
+    Left = 40
+    Top = 32
+  end
+  object dspProdutor: TDataSetProvider
+    DataSet = sdsProdutor
+    UpdateMode = upWhereKeyOnly
+    Left = 40
+    Top = 104
+  end
+  object cdsProdutor: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspProduto'
+    Left = 40
+    Top = 168
+  end
+end
