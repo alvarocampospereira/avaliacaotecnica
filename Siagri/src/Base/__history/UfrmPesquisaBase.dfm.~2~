@@ -1,0 +1,56 @@
+inherited frmPesquisaBase: TfrmPesquisaBase
+  Caption = 'frmPesquisaBase'
+  ClientHeight = 248
+  ExplicitWidth = 463
+  ExplicitHeight = 287
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnlRodape: TPanel
+    Left = 0
+    Top = 207
+    Width = 447
+    Height = 41
+    Align = alBottom
+    TabOrder = 0
+    ExplicitLeft = -28
+    ExplicitTop = 160
+    ExplicitWidth = 475
+    object btnConfirmar: TBitBtn
+      Left = 32
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = 'Confirmar'
+      TabOrder = 0
+    end
+    object btnCancelar: TBitBtn
+      Left = 320
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = 'Cancelar'
+      TabOrder = 1
+    end
+  end
+  object pnlTopo: TPanel
+    Left = 0
+    Top = 0
+    Width = 447
+    Height = 65
+    Align = alTop
+    TabOrder = 1
+  end
+  object grdPesquisa: TDBGrid
+    Left = 0
+    Top = 65
+    Width = 447
+    Height = 142
+    Align = alClient
+    TabOrder = 2
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+end

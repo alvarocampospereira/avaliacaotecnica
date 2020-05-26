@@ -1,0 +1,24 @@
+unit UfrmBaseModal;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs;
+
+type
+  TfrmBaseModal = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmBaseModal: TfrmBaseModal;
+
+implementation
+
+{$R *.dfm}
+
+end.

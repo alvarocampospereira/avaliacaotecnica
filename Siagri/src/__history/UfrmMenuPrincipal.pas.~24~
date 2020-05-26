@@ -1,0 +1,124 @@
+unit UfrmMenuPrincipal;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Menus;
+
+type
+  TfrmMenuPrincipal = class(TForm)
+    MainMenu1: TMainMenu;
+    mniCadastro: TMenuItem;
+    mniProduto: TMenuItem;
+    mniDistribuidor: TMenuItem;
+    mniProdutor: TMenuItem;
+    mniMovimentao: TMenuItem;
+    mniManutencaoNegociacao: TMenuItem;
+    mniConsulta: TMenuItem;
+    mnConsultaiNegociacao: TMenuItem;
+    mniCadastroNegociacao: TMenuItem;
+    procedure mnConsultaiNegociacaoClick(Sender: TObject);
+    procedure mniCadastroNegociacaoClick(Sender: TObject);
+    procedure mniManutencaoNegociacaoClick(Sender: TObject);
+    procedure mniProdutoClick(Sender: TObject);
+    procedure mniDistribuidorClick(Sender: TObject);
+    procedure mniProdutorClick(Sender: TObject);
+  private
+    { Private declarations }
+    procedure criarJanela(nomeForm: TFormClass; var Reference);
+  public
+    { Public declarations }
+  end;
+
+var
+  frmMenuPrincipal: TfrmMenuPrincipal;
+
+implementation
+
+{$R *.dfm}
+
+uses ufrmCadastroProduto, ufrmCadastroDistribuidor, UfrmCadastroProdutor,
+  UfrmCadastroNegociacao;
+
+procedure TfrmMenuPrincipal.criarJanela(nomeForm: TFormClass; var Reference);
+var
+  Instance: TForm;
+  formCriado: Boolean;
+  i: Integer;
+begin
+  formCriado := false;
+  for i := 0 to ComponentCount -1 do
+    if Components[i] is TForm then
+      if TForm(Components[i]) = TForm(Reference) then// nomeForm then
+         formCriado := true;
+
+  Screen.Cursor:= crHourglass;
+  LockWindowUpdate(Self.Handle);
+  if not formCriado then
+    try
+      Instance:= TForm(nomeForm.NewInstance);
+      TForm(Reference):= Instance;
+      try
+        Instance.Create(Self);
+        if (Instance as TForm).FormStyle = fsNormal then
+        begin
+          (Instance as TForm).FormStyle := fsMdiChild;
+          (Instance as TForm).Visible := True;
+        end;
+      except
+        TForm(Reference):= nil;
+        Instance.Free;
+        raise;
+      end;
+    finally
+      Screen.Cursor:= crDefault;
+    end
+  else
+    with TForm(Reference) do begin
+      if WindowState = wsMinimized then WindowState:= wsNormal;
+      BringToFront;
+      Screen.Cursor:= crDefault;
+      SetFocus;
+    end;
+ 
+  LockWindowUpdate(0);
+end;
+
+procedure TfrmMenuPrincipal.mniCadastroNegociacaoClick(Sender: TObject);
+begin
+  // cadastro negociação
+  criarJanela(tfrmCadastroNegociacao, frmCadastroNegociacao);
+end;
+
+procedure TfrmMenuPrincipal.mniDistribuidorClick(Sender: TObject);
+begin
+ // cadastro distribuidor
+ criarJanela(TfrmCadastroDistribuidor,frmCadastroDistribuidor);
+end;
+
+procedure TfrmMenuPrincipal.mniManutencaoNegociacaoClick(Sender: TObject);
+begin
+  // manutenção de negociacao
+  criarJanela(TfrmManutencaoNegociacao, frmManutencaoNegociacao);
+end;
+
+procedure TfrmMenuPrincipal.mnConsultaiNegociacaoClick(Sender: TObject);
+begin
+  // consulta negociação
+  criarJanela(TfrmConsultaNegociacao, frmConsultaNegociacao);
+end;
+
+procedure TfrmMenuPrincipal.mniProdutoClick(Sender: TObject);
+begin
+  // cadastro produto
+  criarJanela(TfrmCadastroProduto, frmCadastroProduto);
+end;
+
+procedure TfrmMenuPrincipal.mniProdutorClick(Sender: TObject);
+begin
+  // cadastro produtor
+  criarJanela(TfrmCadastroProdutor, frmCadastroProdutor);
+end;
+
+end.

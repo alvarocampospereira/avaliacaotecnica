@@ -1,0 +1,31 @@
+unit UfrmPesquisaBase;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, UfrmBaseModal, Grids, DBGrids, StdCtrls, Buttons, ExtCtrls, DB;
+
+type
+  TfrmPesquisaBase = class(TfrmBaseModal)
+    pnlRodape: TPanel;
+    btnConfirmar: TBitBtn;
+    btnCancelar: TBitBtn;
+    pnlTopo: TPanel;
+    grdPesquisa: TDBGrid;
+    dtsPesquisa: TDataSource;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    property ID: Integer;
+  end;
+
+var
+  frmPesquisaBase: TfrmPesquisaBase;
+
+implementation
+
+{$R *.dfm}
+
+end.

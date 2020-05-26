@@ -1,0 +1,61 @@
+unit UfrmPesquisaBase;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, UfrmBaseModal, Grids, DBGrids, StdCtrls, Buttons, ExtCtrls, DB;
+
+type
+  TfrmPesquisaBase = class(TfrmBaseModal)
+    pnlRodape: TPanel;
+    btnConfirmar: TBitBtn;
+    btnCancelar: TBitBtn;
+    pnlTopo: TPanel;
+    grdPesquisa: TDBGrid;
+    dtsPesquisa: TDataSource;
+    lblPesquisa: TLabel;
+    edtPesquisa: TEdit;
+    procedure edtPesquisaChange(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    FID: Integer;
+    procedure SetID(const Value: Integer);
+    { Private declarations }
+  public
+    { Public declarations }
+    property ID: Integer read FID write SetID;
+  protected
+    procedure ExecutarBusca;  
+  end;
+
+var
+  frmPesquisaBase: TfrmPesquisaBase;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmPesquisaBase.edtPesquisaChange(Sender: TObject);
+begin
+  inherited;
+  ExecutarBusca;
+end;
+
+procedure TfrmPesquisaBase.ExecutarBusca;
+begin
+
+end;
+
+procedure TfrmPesquisaBase.FormCreate(Sender: TObject);
+begin
+  inherited;
+  ID := 0;
+end;
+
+procedure TfrmPesquisaBase.SetID(const Value: Integer);
+begin
+  FID := Value;
+end;
+
+end.
